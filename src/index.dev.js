@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import { Provider } from 'react-redux'
 import createStore from './createStore'
+import { fetchCards } from './actions'
 
 const mountPoint = document.getElementById('root')
 const store = createStore()
@@ -20,6 +21,7 @@ const getApp = App => (
 // store.subscribe(() => console.log(store.getState()))
 
 ReactDOM.render(getApp(App), mountPoint)
+store.dispatch(fetchCards())
 
 if (module.hot) {
   module.hot.accept('./App', () => {

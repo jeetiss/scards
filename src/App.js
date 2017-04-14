@@ -1,4 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { Card } from './components/styled'
+import { Layout } from './components/layout'
+import { Loader } from './components/loader'
 import { injectGlobal } from 'styled-components'
 
 injectGlobal`
@@ -13,12 +17,27 @@ injectGlobal`
   }
 `
 
-function App () {
-  return (
-    <div>
-      приветики
-    </div>
-  )
+function App ({ items, loading }) {
+  if (loading) {
+    return <Loader />
+  } else {
+    return (
+      <Layout>
+        { items.map((item, idx) =>
+          <Card
+            key={idx}
+            style={{
+              width: +item.size.split('x')[0],
+              height: +item.size.split('x')[1]
+            }}
+          >
+            <img src={item.url} />
+          </Card>
+        )}
+      </Layout>
+    )
+  }
 }
 
-export default App
+const stop = store => store
+export default connect(stop)(App)

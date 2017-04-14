@@ -34,7 +34,8 @@ const productionPlugins = [
 module.exports = createConfig([
   setOutput('./build/bundle.js'),
   defineConstants({
-    'process.env.NODE_ENV': process.env.NODE_ENV || 'development'
+    'process.env.NODE_ENV': process.env.NODE_ENV || 'development',
+    'process.env.SERVER': process.env.SERVER
   }),
   addPlugins(basePlugins),
   env('development', [
